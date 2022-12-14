@@ -31,6 +31,10 @@ const closeModal = () => {
   emits(EMITS_CLICK_CLOSE)
 }
 const onDelete = async (row, index, num) => {
+  if(num > row.Count) {
+    ElMessage.warning(`数量不能大于${row.Count}`)
+    return;
+  }
   const res = await axios.get('/api/playerop', {
     params: {
       uid: localStorage.getItem('uid') || '',
@@ -86,6 +90,19 @@ const columns = ref([
 
 <style lang="scss" scoped>
 .bagItems{
+  height: 100%;
+  ::v-deep .el-dialog{
+    overflow-y: auto;
+    max-height: calc(100% - 200px);
+    &::-webkit-scrollbar {
+      width: 10px;
+      background-color: #d9d9d9;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 5px;
+      background-color: #b9b9b9;
+    }
 
+  }
 }
 </style>

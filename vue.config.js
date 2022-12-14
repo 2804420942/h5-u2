@@ -1,6 +1,6 @@
 const { defineConfig } = require('@vue/cli-service')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const isAnalyzeMode = process.env.NODE_ENV === 'analyzeMode'
+const isAnalyzeMode = process.env.APP_MODE === 'analyzeMode'
 
 module.exports = defineConfig({
   publicPath: './',
@@ -19,10 +19,7 @@ module.exports = defineConfig({
       cacheGroups: {
         eleVendor: {
           test: /[\\/]node_modules[\\/]/,
-          name(module) {
-            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1]
-            return `npm.${packageName.replace('@', '')}`
-          }
+          name: 'element-plus'
         }
       }
     }

@@ -88,7 +88,7 @@ const getData = async (uid) => {
                                   ).List
     bagEquipList.value = transformJSON(list.EquipmentData.replace(/\}\n\s*\[/g, '},[')
                                                          .replace(/MainPropIndex : {(.*)}/g, 'MainPropIndex : [$1]')).List
-    bagCoinList.value = transformJSON(list.RoleBase)
+    bagCoinList.value = list.Currency
   }
 }
 

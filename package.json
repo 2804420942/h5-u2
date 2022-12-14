@@ -5,8 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "rimraf /dist && vue-cli-service build",
-    "build:test": "rimraf /dist && cross-env NODE_ENV=development vue-cli-service build",
-    "build:analyze": "rimraf /dist && cross-env NODE_ENV=analyzeMode vue-cli-service build",
+    "build:test": "rimraf /dist && cross-env APP_MODE=development vue-cli-service build",
+    "build:analyze": "rimraf /dist && cross-env APP_MODE=analyzeMode vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

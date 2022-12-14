@@ -3,7 +3,7 @@ import { ElMessage } from 'element-plus'
 // 配置项
 // http://192.168.1.135:3868 http://192.168.1.199:3868
 const axiosOption = {
-    baseURL: process.env.NODE_ENV === "production" ? location.origin : 'http://192.168.1.199:3868',
+    baseURL: process.env.NODE_ENV === "production" ? location.origin : 'http://192.168.1.130:3868',
     // baseURL: 'localhost',
     timeout: 5000
 }

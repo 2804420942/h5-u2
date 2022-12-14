@@ -8,8 +8,8 @@
             <input @change="readText" ref="files" type="file" style="display: none;"/>
             <el-button @click="selectFile">选择文件</el-button>
           </el-form-item>
-          <el-form-item label="操作物品ID" required>
-            <el-input placeholder="请输入操作物品ID" v-model="form.opId" style="width: 200px"/>
+          <el-form-item label="VIP活动ID" required>
+            <el-input placeholder="请输入VIP活动ID" v-model="form.opId" style="width: 200px"/>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="submit">提交</el-button>
@@ -56,6 +56,7 @@ const submit = async () => {
       opUser: localStorage.getItem('account') || '',
       opId: form.opId,
       opType: 2,
+      paramStr: JSON.stringify({opId: form.opId}),
     }
   })
   if(res.ret == 3) {
@@ -84,7 +85,7 @@ const readText = () => {
     reader.onload = function () {
       //统一格式 |
       if(ext === 'txt') {
-        uidText = reader.result.replace(new RegExp(/\\r\\n/gm), "|");
+        uidText = reader.result.replace(/\r\n/gm, "|");
       } else {
         uidText = reader.result.match(/\d{6}/g).join('|')
       }

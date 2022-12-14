@@ -1,5 +1,5 @@
 <template>
-  <div class="table">
+  <div class="table" @click="hidePop">
     <el-table
       ref="table"
       style="width: 100%"
@@ -9,7 +9,7 @@
         <el-table-column v-for="col in props.columns" :key="col.prop" :prop="col.prop" :label="col.label" :width="col.width">
           <template #default="scope" v-if="col.prop === 'operation'">
             <el-space v-for="(op, idx) in col.operation" :key="idx">
-              <el-popover v-if="op.text === '删除'" :visible="visible[scope.$index]" placement="top" :width="160">
+              <el-popover v-if="op.text === '删除'" :visible="visible[scope.$index]" placement="top" :width="160" trigger="hover">
                 <p>请输入你想要删除的数量</p>
                 <el-input-number placeholder="请输入数量" v-model="num" :min="1" size="small"/>
                 <div style="text-align: right; margin: 0">
@@ -29,7 +29,7 @@
       </template>
       <template v-else #default>
         <el-table-column type="expand" :width="50">
-          <template #default="data">
+          <template #default="data" >
             <el-table :data="exTable[data.$index]">
               <el-table-column v-for="col in props.columns[0].cols[data?.row?.type - 1]" :key="col.prop" :prop="col.prop" :label="col.label" :width="col.width" />
             </el-table>
@@ -76,7 +76,15 @@ const exTable = ref([])
 watch(() => props.data, (list) => {
   if(props.columns[0].type == 'expand') {
     exTable.value = list.map(item => {
-      return [JSON.parse(item.paramStr)]
+      if(item.paramStr) {
+        if(item.type == 5) {
+          const obj = JSON.parse(item.paramStr)
+          obj.uidList = item.uidList || item.uid
+          return [obj]
+        }
+        return [JSON.parse(item.paramStr)]
+      }
+      
     })
   }
 })
@@ -88,6 +96,11 @@ const num = ref(1)
 const handleCurrentChange = (val) => {
   emits('changePage', val)
 }
+
+const hidePop = () => {
+  visible.value = []
+}
+
 </script>
 
 <style lang="scss" scoped>

@@ -1,0 +1,16 @@
+version: "3"
+services:
+  h5-u2:
+    build:
+      context: .
+      dockerfile: node.Dockerfile
+    ports:
+      - 4000:80
+  # nginx-app:
+  #   build:
+  #     context: .
+  #     dockerfile: nginx.Dockerfile
+  #   ports:
+  #     - 4000:80
+  #   volumes:
+  #     - ./dist:/usr/share/nginx/html

@@ -1,13 +1,11 @@
 <template>
   <div class="hero">
     <el-form :inline="true" :model="form" label-width="120px">
+      <el-form-item label="uid">
+        <el-input placeholder="请输入uid" v-model="form.uid" style="width: 200px"/>
+      </el-form-item>
       <el-form-item label="操作类型">
-        <el-select v-model="form.type" placeholder="请选择操作类型">
-          <el-option
-            label="删除"
-            :value="1"
-          />
-        </el-select>
+        <el-input placeholder="请输入操作类型" v-model="form.type" style="width: 200px"/>
       </el-form-item>
       <el-form-item label="操作人员账号">
         <el-input placeholder="请输入操作人员账号" v-model="form.opUser" style="width: 200px"/>
@@ -29,9 +27,11 @@ import Table from "../components/Table.vue"
 import cols from "@/utils/cols";
 import { onMounted } from "vue";
 import axios from "@/api/request";
+import { fromByteArray } from "ipaddr.js";
 
 const OPTYPE = {
-  1: '删除'
+  1: '删除',
+  2: '新增'
 }
 const TYPE = {
   1: '货币',
@@ -42,7 +42,8 @@ const TYPE = {
 }
 const total = ref(0)
 const form = reactive({
-  type: 1,
+  uid: '',
+  type: '',
   opUser: '',
   opId: ''
 })
@@ -58,6 +59,7 @@ const getData = async (pageIndex = 1 ) => {
     params: {
       pageSize: 10,
       pageIndex,
+      uid: form.uid,
       type: form.type,
       opUser: form.opUser,
       opId: form.opId,

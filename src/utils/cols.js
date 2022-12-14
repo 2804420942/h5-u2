@@ -94,5 +94,15 @@ export default [
       prop: 'num',
       label: '操作数量'
     }
+  ],
+  [
+    {
+      prop: 'uidList',
+      label: 'uidList'
+    },
+    {
+      prop: 'opId',
+      label: 'opId'
+    }
   ]
 ]
