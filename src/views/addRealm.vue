@@ -11,7 +11,7 @@
                   style="width: 275px"
                   placeholder="选择服务器大区"
                 >
-                  <el-option disabled value="NA" label="NA">NA</el-option>
+                  <el-option value="NA" label="NA">NA</el-option>
                   <el-option value="EU" label="EU">EU</el-option>
                   <el-option value="Asia" label="Asia">Asia</el-option>
                 </el-select>
